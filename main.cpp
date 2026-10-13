@@ -86,7 +86,7 @@ int main() {
     cout << "toMove before move: ";
     toMove.Output();
 
-    MyString movedTarget(std::move(toMove));
+    MyString movedTarget(move(toMove));
     cout << "movedTarget after move constructor: ";
     movedTarget.Output();
     cout << "toMove after move constructor: ";
@@ -101,7 +101,7 @@ int main() {
     cout << "sourceAssign before assignment: ";
     sourceAssign.Output();
 
-    destAssign = std::move(sourceAssign);
+    destAssign = move(sourceAssign);
     cout << "destAssign after move assignment: ";
     destAssign.Output();
     cout << "sourceAssign after move assignment: ";
