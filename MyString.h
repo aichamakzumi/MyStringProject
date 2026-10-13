@@ -1,6 +1,8 @@
 #ifndef MYSTRING_H
 #define MYSTRING_H
 
+#include <initializer_list>
+
 class MyString {
     char* str;
     int length;
@@ -11,7 +13,12 @@ public:
     MyString(int size);
     MyString(const char* initStr);
     MyString(const MyString& obj);
+    MyString(std::initializer_list<char> list); 
+    MyString(MyString&& obj);                   
     ~MyString();
+
+    MyString& operator=(const MyString& obj);   
+    MyString& operator=(MyString&& obj);        
 
     void Input();
     void Output();

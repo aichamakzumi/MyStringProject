@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "MyString.h"
 
 using namespace std;
@@ -71,6 +72,42 @@ int main() {
     obj.Output();
 
     cout << "Object count: " << MyString::GetCount() << "\n";
+
+    
+    cout << "\n=== 1. Test initializer_list ===\n";
+    MyString initObj{ 'H', 'e', 'l', 'l', 'o' };
+    cout << "initObj {'H','e','l','l','o'}: ";
+    initObj.Output();
+    cout << "Length of initObj: " << initObj.MyStrLen() << "\n";
+
+    
+    cout << "\n=== 2. Test Move Constructor ===\n";
+    MyString toMove("Hello Move Constructor");
+    cout << "toMove before move: ";
+    toMove.Output();
+
+    MyString movedTarget(std::move(toMove));
+    cout << "movedTarget after move constructor: ";
+    movedTarget.Output();
+    cout << "toMove after move constructor: ";
+    toMove.Output();
+
+    
+    cout << "\n=== 3. Test Move Assignment ===\n";
+    MyString sourceAssign("Hello Move Assignment");
+    MyString destAssign("Old Destination Value");
+    cout << "destAssign before assignment: ";
+    destAssign.Output();
+    cout << "sourceAssign before assignment: ";
+    sourceAssign.Output();
+
+    destAssign = std::move(sourceAssign);
+    cout << "destAssign after move assignment: ";
+    destAssign.Output();
+    cout << "sourceAssign after move assignment: ";
+    sourceAssign.Output();
+
+    cout << "\nTotal object count: " << MyString::GetCount() << "\n";
 
     return 0;
 }

@@ -13,6 +13,11 @@ int StrLen(const char* s) {
 }
 
 void StrCpy(char* dest, const char* src) {
+    if (!dest) return;
+    if (!src) {
+        dest[0] = '\0';
+        return;
+    }
     int i = 0;
     while (src[i] != '\0') {
         dest[i] = src[i];
@@ -51,9 +56,52 @@ MyString::MyString(const MyString& obj) {
     count++;
 }
 
+MyString::MyString(std::initializer_list<char> list) {
+    length = (int)list.size();
+    str = new char[length + 1];
+    int i = 0;
+    for (char c : list) {
+        str[i] = c;
+        i++;
+    }
+    str[length] = '\0';
+    count++;
+}
+
+MyString::MyString(MyString&& obj) {
+    str = obj.str;
+    length = obj.length;
+    obj.str = nullptr;
+    obj.length = 0;
+    count++;
+}
+
 MyString::~MyString() {
     delete[] str;
     count--;
+}
+
+MyString& MyString::operator=(const MyString& obj) {
+    if (this == &obj) {
+        return *this;
+    }
+    delete[] str;
+    length = obj.length;
+    str = new char[length + 1];
+    StrCpy(str, obj.str);
+    return *this;
+}
+
+MyString& MyString::operator=(MyString&& obj) {
+    if (this == &obj) {
+        return *this;
+    }
+    delete[] str;
+    str = obj.str;
+    length = obj.length;
+    obj.str = nullptr;
+    obj.length = 0;
+    return *this;
 }
 
 void MyString::Input() {
@@ -66,7 +114,11 @@ void MyString::Input() {
 }
 
 void MyString::Output() {
-    cout << str << "\n";
+    if (str != nullptr) {
+        cout << str << "\n";
+    } else {
+        cout << "(empty)\n";
+    }
 }
 
 bool MyString::MyStrStr(const char* s) {
