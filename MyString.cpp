@@ -56,7 +56,7 @@ MyString::MyString(const MyString& obj) {
     count++;
 }
 
-MyString::MyString(std::initializer_list<char> list) {
+MyString::MyString(initializer_list<char> list) {
     length = (int)list.size();
     str = new char[length + 1];
     int i = 0;

@@ -3,6 +3,8 @@
 
 #include <initializer_list>
 
+using namespace std;
+
 class MyString {
     char* str;
     int length;
@@ -13,7 +15,7 @@ public:
     MyString(int size);
     MyString(const char* initStr);
     MyString(const MyString& obj);
-    MyString(std::initializer_list<char> list); 
+    MyString(initializer_list<char> list); 
     MyString(MyString&& obj);                   
     ~MyString();
 
